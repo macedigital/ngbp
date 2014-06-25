@@ -1,6 +1,36 @@
-*.sw*
-*~
-build/
+# app specific folders
 bin/
+dist/
 node_modules/
 vendor/
+
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.sw*
+*.swo
+*.swp
+*.vi
+*~
+
+# OS or Editor folders
+.cache
+.DS_Store
+.komodotools
+.idea
+.project
+.settings
+.tmproj
+*.esproj
+*.komodoproject
+*.sublime-project
+*.sublime-workspace
+dwsync.xml
+nbproject
+_notes
+Thumbs.db
+
+
