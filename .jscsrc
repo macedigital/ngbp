@@ -1,0 +1,15 @@
+{
+  "preset": "google",
+
+  "requireParenthesesAroundIIFE": true,
+  "validateLineBreaks": "LF",
+  "maximumLineLength": 120,
+
+  "disallowMultipleLineBreaks": null,
+  
+  "disallowKeywords": ["with"],
+  "disallowSpacesInsideObjectBrackets": null,
+  "disallowImplicitTypeConversion": ["string"],
+
+  "excludeFiles": []
+}

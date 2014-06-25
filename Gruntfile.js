@@ -292,6 +292,16 @@ module.exports = function ( grunt ) {
     },
 
     /**
+     * `jscs` checks javascript code style against coding style conventions
+     */
+    jscs: {
+      src: ['src/**/*.js'],
+      options: {
+        config: ".jscsrc"
+      }
+    },
+
+    /**
      * `coffeelint` does the same as `jshint`, but for CoffeeScript.
      * CoffeeScript is not the default in ngBoilerplate, so we're just using
      * the defaults here.
@@ -557,7 +567,7 @@ module.exports = function ( grunt ) {
     'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less_imports:build', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
-    'karma:continuous' 
+    'karma:continuous'
   ]);
 
   /**
