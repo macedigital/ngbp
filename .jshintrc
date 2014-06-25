@@ -1,0 +1,25 @@
+{
+  "boss": true,
+  "browser": true,
+  "curly": true,
+  "es3": false,
+  "forin": true,
+  "freeze": true,
+  "eqeqeq": true,
+  "eqnull": false,
+  "latedef": true,
+  "node": true,
+  "indent": 2,
+  "immed": true,
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "quotmark": "single",
+  "strict": false,
+  "undef": true,
+  "unused": "vars",
+  "trailing": true,
+  "globals": {
+    "angular": true
+  }
+}

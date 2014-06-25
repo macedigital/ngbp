@@ -21,7 +21,7 @@ module.exports = function ( grunt ) {
      * We read in our `package.json` file so we can access the package name and
      * version. It's already there, so we don't repeat ourselves here.
      */
-    pkg: grunt.file.readJSON("package.json"),
+    pkg: grunt.file.readJSON('package.json'),
 
     /**
      * The banner is the comment that is placed at the top of our compiled 
@@ -55,14 +55,14 @@ module.exports = function ( grunt ) {
     bump: {
       options: {
         files: [
-          "package.json", 
-          "bower.json"
+          'package.json', 
+          'bower.json'
         ],
         commit: false,
         commitMessage: 'chore(release): v%VERSION%',
         commitFiles: [
-          "package.json", 
-          "client/bower.json"
+          'package.json', 
+          'client/bower.json'
         ],
         createTag: false,
         tagName: 'v%VERSION%',
@@ -260,22 +260,15 @@ module.exports = function ( grunt ) {
 
     /**
      * `jshint` defines the rules of our linter as well as which files we
-     * should check. This file, all javascript sources, and all our unit tests
-     * are linted based on the policies listed in `options`. But we can also
-     * specify exclusionary patterns by prefixing them with an exclamation
-     * point (!); this is useful when code comes from a third party but is
-     * nonetheless inside `src/`.
+     * should check. This file and all our unit tests are linted based on 
+     * the policies listed in `options`. 
+     * All files inside `src/` are linted based on the policies listed 
+     * in the`.jshintrc` file in the root folder, but you can also add 
+     * additional `.jshintrc` files per module folder which then will be 
+     * used for linting of any files inside; this is especially useful when 
+     * code comes from a third party but is nonetheless inside `src/`.
      */
     jshint: {
-      src: [ 
-        '<%= app_files.js %>'
-      ],
-      test: [
-        '<%= app_files.jsunit %>'
-      ],
-      gruntfile: [
-        'Gruntfile.js'
-      ],
       options: {
         curly: true,
         immed: true,
@@ -283,9 +276,19 @@ module.exports = function ( grunt ) {
         noarg: true,
         sub: true,
         boss: true,
-        eqnull: true
+        eqnull: true,
+        globals: {}
       },
-      globals: {}
+      src: {
+        options: {
+          jshintrc: true
+        },
+        files: {
+          src: ['<%= app_files.js %>']
+        }
+      },
+      test: ['<%= app_files.jsunit %>'],
+      gruntfile: ['Gruntfile.js']
     },
 
     /**
