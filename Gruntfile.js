@@ -226,8 +226,19 @@ module.exports = function ( grunt ) {
     },
 
     /**
+     * Less_imports auto concats all less files from any module.
+     * @link https://github.com/ngbp/ngbp/issues/158
+     */
+    less_imports: {
+      build: {
+        src: ['src/less/main.less', 'src/**/*.less', '!src/less/master.less', '!src/less/variables.less'],
+        dest: 'src/less/master.less'
+      }
+    },
+    
+    /**
      * `grunt-contrib-less` handles our LESS compilation and uglification automatically.
-     * Only our `main.less` file is included in compilation; all other files
+     * Only our `master.less` file is included in compilation; all other files
      * must be imported from this file.
      */
     less: {
@@ -540,7 +551,7 @@ module.exports = function ( grunt ) {
    * The `build` task gets your app ready to run for development and testing.
    */
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
+    'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less_imports:build', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
     'karma:continuous' 
