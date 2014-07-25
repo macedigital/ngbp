@@ -7,6 +7,7 @@
   "freeze": true,
   "eqeqeq": true,
   "eqnull": false,
+  "globalstrict": true,
   "latedef": true,
   "node": true,
   "indent": 2,
