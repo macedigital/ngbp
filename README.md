@@ -222,11 +222,11 @@ $ grunt compile
 ```
 
 This will concatenate and minify your sources and place them by default into the
-`bin/` directory. There will only be three files: `index.html`,
+`dist/` directory. There will only be three files: `index.html`,
 `your-app-name.js`, and `your-app-name.css`. All of the vendor dependencies like
 Bootstrap styles and AngularJS itself have been added to them for super-easy
 deploying. If you use any assets (`src/assets/`) then they will be copied to
-`bin/` as is.
+`dist/` as is.
 
 Lastly, a complete build is always available by simply running the default
 task, which runs `build` and then `compile`:
@@ -308,9 +308,9 @@ $ grunt
 ```
 
 This will perform a build and then a compile. The compiled site - ready for
-uploading to the server! - is located in `bin/`, taking a cue from
+uploading to the server! - is located in `dist/`, taking a cue from
 traditional software development. To test that your full site works as
-expected, open the `bin/index.html` file in your browser. Voila!
+expected, open the `dist/index.html` file in your browser. Voila!
 
 ### Live Reload!
 

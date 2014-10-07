@@ -63,7 +63,7 @@ $ grunt
 ```
 
 This will do everything needed and place our built code inside a folder called
-`bin/`. Even more magical, we can tell Grunt to watch for file changes we make
+`dist/`. Even more magical, we can tell Grunt to watch for file changes we make
 so it can re-build our site on-the-fly:
 
 ```sh
