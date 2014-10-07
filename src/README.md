@@ -19,6 +19,7 @@ src/
   |  |- main.less
   |  |- variables.less
   |- index.html
+  |- index.jade
 ```
 
 - `src/app/` - application-specific code, i.e. code not likely to be reused in
@@ -28,6 +29,7 @@ src/
 - `src/common/` - third-party libraries or components likely to be reused in
   another application. [Read more &raquo;](common/README.md)
 - `src/less/` - LESS CSS files. [Read more &raquo;](less/README.md)
+- `src/index.jade` - this is the Jade version of the HTML document of the single-page application.
 - `src/index.html` - this is the HTML document of the single-page application.
   See below.
 
@@ -46,3 +48,11 @@ a Grunt template, so variables from `Gruntfile.js` and `package.json` can be
 referenced from within it. Changing `name` in `package.json` from
 "ng-boilerplate" will rename the resultant CSS and JavaScript placed in `build/`,
 so this HTML references them by variable for convenience.
+
+## `index.jade`
+
+The `index.jade` is a jade version of `index.html`. If it is present, running 
+the grunt task `jade:index` will overwrite the (if existing) index.html and will
+be used instead. 
+
+If you don't (for whatever reason) like jade, simply delete `index.jade`.

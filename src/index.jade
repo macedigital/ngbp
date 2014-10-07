@@ -1,0 +1,86 @@
+doctype html
+html(ng-app='ngBoilerplate', ng-controller='AppCtrl')
+    head
+        title(ng-bind='pageTitle')
+        //- font awesome from BootstrapCDN
+        link(href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+        //- compiled CSS
+        | <% styles.forEach( function ( file ) { %><link rel="stylesheet" type="text/css" href="<%= file %>"/><% }); %>
+        //- social media tags
+        meta(name='twitter:card', content='summary')
+        meta(name='twitter:site', content='@joshdmiller')
+        meta(name='twitter:title', content='ngBoilerplate')
+        meta(name='twitter:description', content='Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.')
+        meta(name='twitter:creator', content='@joshdmiller')
+        meta(name='twitter:image:src', content='https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846')
+        meta(property='og:title', content='ngBoilerplate')
+        meta(property='og:type', content='website')
+        meta(property='og:url', content='http://bit.ly/ngBoilerplate')
+        meta(property='og:image', content='https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846')
+        meta(property='og:description', content='Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        //- compiled JavaScript
+        | <% scripts.forEach( function ( file ) { %><script type="text/javascript" src="<%= file %>"></script><% }); %>
+        //- it's stupid to have to load it here, but this is for the +1 button
+        script(src='https://apis.google.com/js/plusone.js', type='text/javascript') { "parsetags": "explicit" }
+    body
+        .container
+            .navbar.navbar-default
+                .navbar-header
+                    button(type='button', ng-init='menuCollapsed=true', ng-click='menuCollapsed = ! menuCollapsed').navbar-toggle
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    .navbar-brand ngbp
+                        small
+                            a(href='http://github.com/ngbp/ngbp/blob/v<%= version %>-release/CHANGELOG.md')  v<%= version %>
+                div(collapse='menuCollapsed').collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        li(ui-sref-active='active')
+                            a(href, ui-sref='home')
+                                i.fa.fa-home
+                                |  Home
+                        li(ui-sref-active='active')
+                            a(href, ui-sref='about')
+                                i.fa.fa-info-circle
+                                |  What is it?
+                        li
+                            a(href='https://github.com/ngbp/ngbp#readme')
+                                i.fa.fa-book
+                                |  Read the docs
+                        li
+                            a(href='https://github.com/ngbp/ngbp')
+                                i.fa.fa-github-alt
+                                |  Github
+                        li
+                            a(href='https://github.com/ngbp/ngbp/issues')
+                                i.fa.fa-comments
+                                |  Support
+        
+        div(ui-view='main').container
+        
+        footer.footer
+            .container
+                .footer-inner
+                    ul.social
+                        li
+                            a(target='_blank', href='http://gplus.to/joshdmiller')
+                                i.fa.fa-google-plus-sign
+                        li
+                            a(target='_blank', href='http://twitter.com/joshdmiller')
+                                i.fa.fa-twitter-sign
+                        li
+                            a(target='_blank', href='http://linkedin.com/in/joshdmiller')
+                                i.fa.fa-linkedin-sign
+                        li
+                            a(target='_blank', href='http://github.com/ngbp/ngbp')
+                                i.fa.fa-github-sign
+                    p
+                        | (c) 2013 <a href="http://www.joshdavidmiller.com">Josh David Miller</a>. <a href="http://github.com/ngbp/ngbp/fork_select">Fork this</a> to kickstart your next project.
+                        | <br>
+                        | ngbp is based on <a href="http://www.angularjs.org">AngularJS</a>,
+                        | <a href="http://getbootstrap.com">Bootstrap</a>, 
+                        | <a href="http://angular-ui.github.com/bootstrap">UI Bootstrap</a>,
+                        | and
+                        | <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a>.        

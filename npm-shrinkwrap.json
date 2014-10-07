@@ -1,6 +1,6 @@
 {
   "name": "ngbp",
-  "version": "0.3.3",
+  "version": "0.3.2",
   "dependencies": {
     "coffeelint": {
       "version": "1.6.0",

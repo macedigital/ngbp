@@ -20,16 +20,19 @@ module.exports = {
    * app's unit tests.
    */
   app_files: {
-    js: [ 'src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js' ],
-    jsunit: [ 'src/**/*.spec.js' ],
-    
-    coffee: [ 'src/**/*.coffee', '!src/**/*.spec.coffee' ],
-    coffeeunit: [ 'src/**/*.spec.coffee' ],
+    js: ['src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js'],
+    jsunit: ['src/**/*.spec.js'],
 
-    atpl: [ 'src/app/**/*.tpl.html' ],
-    ctpl: [ 'src/common/**/*.tpl.html' ],
+    coffee: ['src/**/*.coffee', '!src/**/*.spec.coffee'],
+    coffeeunit: ['src/**/*.spec.coffee'],
 
-    html: [ 'src/index.html' ],
+    jade: ['src/**/*.jade', '!src/index.jade'],
+    index: ['src/index.jade'],
+
+    atpl: ['src/app/**/*.tpl.html'],
+    ctpl: ['src/common/**/*.tpl.html'],
+
+    html: ['src/index.html'],
     less: 'src/less/master.less'
   },
 

@@ -168,9 +168,47 @@ module.exports = function ( grunt ) {
           '<%= build_dir %>/src/**/*.js', 
           '<%= html2js.app.dest %>', 
           '<%= html2js.common.dest %>', 
+          '<%= html2js.jade_app.dest %>',
+          '<%= html2js.jade_common.dest %>',
           'module.suffix' 
         ],
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
+      }
+    },
+
+    /**
+     * Task `jade` compiles all jade templates into html templates.
+     * If an `index.jade` file is found in the root of the app folder
+     * its going to be the template even if there is an `index.html` present.
+     */
+    "jade": {
+      compile: {
+        options: {
+          html: true
+        },
+        files: [
+          {
+            src: [ '<%= app_files.jade %>' ],
+            cwd: '.',
+            dest: '<%= build_dir %>',
+            expand: true,
+            extDot: 'last',
+            ext: '.tpl.html'
+          }
+        ]
+      },
+      index: {
+        options: {
+          html: true,
+          data: {
+            scripts: [],
+            styles: [],
+            version: grunt.config('pkg.version')
+          }
+        },
+        files: {
+          'src/index.html': '<%= app_files.index %>'
+        }
       }
     },
 
@@ -346,6 +384,28 @@ module.exports = function ( grunt ) {
         },
         src: [ '<%= app_files.ctpl %>' ],
         dest: '<%= build_dir %>/templates-common.js'
+      },
+    
+      /**
+       * These are the jade file from `src/app`
+       */
+      jade_app: {
+        options: {
+          base: 'build/src/app'
+        },
+        src: [ 'build/src/app/**/*.html' ],
+        dest: '<%= build_dir %>/templates-jade-app.js'
+      },
+
+      /**
+       * These are the jade file from `src/common`
+       */
+      jade_common: {
+        options: {
+          base: 'build/src/common'
+        },
+        src: [ 'build/src/common/**/*.html' ],
+        dest: '<%= build_dir %>/templates-jade-common.js'
       }
     },
 
@@ -384,6 +444,8 @@ module.exports = function ( grunt ) {
           '<%= build_dir %>/src/**/*.js',
           '<%= html2js.common.dest %>',
           '<%= html2js.app.dest %>',
+          '<%= html2js.jade_common.dest %>',
+          '<%= html2js.jade_app.dest %>',
           '<%= vendor_files.css %>',
           '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ]
@@ -415,6 +477,8 @@ module.exports = function ( grunt ) {
           '<%= vendor_files.js %>',
           '<%= html2js.app.dest %>',
           '<%= html2js.common.dest %>',
+          '<%= html2js.jade_common.dest %>',
+          '<%= html2js.jade_app.dest %>',
           '<%= test_files.js %>'
         ]
       }
@@ -490,8 +554,8 @@ module.exports = function ( grunt ) {
        * When index.html changes, we need to compile it.
        */
       html: {
-        files: [ '<%= app_files.html %>' ],
-        tasks: [ 'index:build' ]
+        files: [ '<%= app_files.index %>' ],
+        tasks: [ 'jade:index', 'index:build' ]
       },
 
       /**
@@ -503,6 +567,16 @@ module.exports = function ( grunt ) {
           '<%= app_files.ctpl %>'
         ],
         tasks: [ 'html2js' ]
+      },
+
+      /**
+       * When our jade templates change, we only rewrite the template cache.
+       */
+      jadesrc: {
+        files: [
+          '<%= app_files.jade %>'
+        ],
+        tasks: [ 'jade', 'html2js' ]
       },
 
       /**
@@ -564,7 +638,7 @@ module.exports = function ( grunt ) {
    * The `build` task gets your app ready to run for development and testing.
    */
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', 'jscs', 'coffeelint', 'coffee', 'less_imports:build', 'less:build',
+    'clean', 'jade', 'html2js', 'jshint', 'jscs', 'coffeelint', 'coffee', 'less_imports:build', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
     'karma:continuous'
@@ -602,22 +676,22 @@ module.exports = function ( grunt ) {
    * the list into variables for the template to use and then runs the
    * compilation.
    */
-  grunt.registerMultiTask( 'index', 'Process index.html template', function () {
-    var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
-    var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
-      return file.replace( dirRE, '' );
+  grunt.registerMultiTask('index', 'Process index.html template', function() {
+    var dirRE = new RegExp('^(' + grunt.config('build_dir') + '|' + grunt.config('compile_dir') + ')\/', 'g');
+    var jsFiles = filterForJS(this.filesSrc).map(function(file) {
+      return file.replace(dirRE, '');
     });
-    var cssFiles = filterForCSS( this.filesSrc ).map( function ( file ) {
-      return file.replace( dirRE, '' );
+    var cssFiles = filterForCSS(this.filesSrc).map(function(file) {
+      return file.replace(dirRE, '');
     });
 
-    grunt.file.copy('src/index.html', this.data.dir + '/index.html', { 
-      process: function ( contents, path ) {
-        return grunt.template.process( contents, {
+    grunt.file.copy('src/index.html', this.data.dir + '/index.html', {
+      process: function(contents, path) {
+        return grunt.template.process(contents, {
           data: {
             scripts: jsFiles,
             styles: cssFiles,
-            version: grunt.config( 'pkg.version' )
+            version: grunt.config('pkg.version')
           }
         });
       }

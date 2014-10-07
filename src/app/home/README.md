@@ -6,12 +6,14 @@
 src/
   |- app/
   |  |- home/
+  |  |  |- home.jade
   |  |  |- home.js
   |  |  |- home.less
   |  |  |- home.spec.js
   |  |  |- home.tpl.html
 ```
 
+- `home.jade` - the route jade template.
 - `home.js` - defines the module.
 - `home.less` - module-specific styles; this file is imported into
   `src/less/main.less` manually by the developer.
