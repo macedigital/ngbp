@@ -1,4 +1,5 @@
 # app specific folders
+build/
 dist/
 node_modules/
 vendor/
